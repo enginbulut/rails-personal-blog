@@ -1,10 +1,10 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  before_action :set_blog, only: [:show, :edit, :update, :destroy, :toggle_status]
 
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.all
+    @blogs = Blog.all.order(:title)
   end
 
   # GET /blogs/1
@@ -57,14 +57,25 @@ class BlogsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_blog
-      @blog = Blog.friendly.find(params[:id])
+  def toggle_status
+    if @blog.draft?
+      @blog.published!
+    elsif @blog.published?
+      @blog.draft!
     end
 
-    # Only allow a list of trusted parameters through.
-    def blog_params
-      params.require(:blog).permit(:title, :body)
-    end
+    redirect_to blogs_url, notice: 'Post status has been updated.'
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_blog
+    @blog = Blog.friendly.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def blog_params
+    params.require(:blog).permit(:title, :body)
+  end
 end
