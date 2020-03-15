@@ -41,7 +41,7 @@ body {
 }
 
 .cover-container {
-  max-width: 42em;
+  max-width: 60em;
   text-align: center;
 }
 
@@ -108,6 +108,26 @@ body {
   color: rgba(255, 255, 255, .5);
 }
 
+/*
+ * Custom Styles
+ */
 .justify {
   text-align: justify;
+}
+
+.card-body {
+  color: black;
+  text-align: left;
+}
+
+.auth-links a {
+  color: black;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
 }
