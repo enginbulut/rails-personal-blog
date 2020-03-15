@@ -15,4 +15,8 @@ module ApplicationHelper
     greeting = "Thanks for visiting me from #{session[:source]}"
     content_tag(:p, greeting, class: 'source-greeting')
   end
+
+  def copyright_generator
+    "&copy; #{Time.now.year} | <b>Engin Bulut</b> All rights reserved".html_safe
+  end
 end
